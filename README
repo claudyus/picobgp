@@ -1,0 +1,17 @@
+picobgp is minimalistic not-compliant free-inspired deamon for
+subnetowork advertising and route topology update.
+
+The picobgp software was written to dynamicaly update the routing
+tables of some PCs of my coorporate vpn and so it doesn't want to became
+a solution to your problem but I hope that this code can be usefull
+to someone else!
+
+USAGE
+---------------
+simple call picobgp followed by -s X.Y.Z.A/B repeted n-th for example:
+/bin/picobgp -s 10.0.1.0/24 -s 10.55.0.0/16
+
+
+CONTACTS
+--------------
+
