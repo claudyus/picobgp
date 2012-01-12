@@ -9,7 +9,7 @@ to someone else!
 USAGE
 ---------------
 simple call picobgp followed by -s X.Y.Z.A/B repeted n-th for example:
-/bin/picobgp -s 10.0.1.0/24 -s 10.55.0.0/16
+/bin/picobgp -i eth0 -s 10.0.1.0/24 -s 10.55.0.0/16
 
 
 CONTACTS
