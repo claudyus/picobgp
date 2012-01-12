@@ -1,8 +1,6 @@
 
 #include "pbgp.h"
 
-int sd; //server sock, yes its global!
-
 int main (int argc, char *argv[]) {
 
 	DEFandNULL(struct sigaction, handler);

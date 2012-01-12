@@ -15,3 +15,15 @@
 #include <net/if.h>
 
 #define DEFandNULL(a, b) (a b; memset(&b, 0, sizeof(a))
+
+typedef struct sbgpmsg {
+	struct in_addr addr;
+	struct in_addr netmask;
+	struct timeval l_update;
+} bgpmsg;
+
+int sd;
+int ipslen;
+bgpmsg *ips;
+
+
