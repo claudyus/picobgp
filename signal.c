@@ -2,11 +2,19 @@
 #include "pbgp.h"
 
 void let_me_spam(){
-	if (sendto(sd, buffer, , 0, &, )==-1)
-		perror("sendto");
-		exit(1);
-	}
+	int i;
+	DEFandNULL(struct sockaddr_in, raddr);
+	raddr.sin_family = PF_INET;
+	raddr.sin_addr.s_addr = inet_addr("255.255.255.255");
+	raddr.sin_port = htons(9876);
 
+	for (i=0; i < ipslen; i++)
+		
+		if (sendto(sd, &(ips[i]), sizeof(bgpmsg), 0, &raddr, )==-1)
+			perror("sendto");
+			exit(1);
+		}
+	}
 }
 
 
