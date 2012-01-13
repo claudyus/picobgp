@@ -24,6 +24,7 @@ void signal_handler (int type) {
 			break;
 		case SIGALRM:
 			let_me_spam();
+			clean_rt();		//remove old route
 			alarm(3);	//and spam again...
 			break;
 		case SIGUSR1:
