@@ -40,9 +40,9 @@ int main (int argc, char *argv[]) {
 
 	fd_set fds;
 	FD_ZERO(&fds);
-	FD_SET(sd, &fds);
 
 	for (;;) {
+		FD_SET(sd, &fds);
 		/*wait for the other spammed package*/
 		int r = select (sd+1, &fds, NULL, NULL, NULL);
 		if (r == -1) {
