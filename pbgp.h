@@ -14,7 +14,7 @@
 #include <netinet/in.h>
 #include <net/if.h>
 
-#define DEFandNULL(a, b) (a b; memset(&b, 0, sizeof(a))
+#define DEFandNULL(type, name) type name; memset(&name, 0, sizeof(type));
 
 typedef struct sbgpmsg {
 	struct in_addr addr;
@@ -22,8 +22,17 @@ typedef struct sbgpmsg {
 	struct timeval l_update;
 } bgpmsg;
 
-int sd;
+int sd;		//udp socket descriptor
+int rd;		//route sock descriptor
+
 int ipslen;
 bgpmsg *ips;
 
+int ann_len;
+bgpmsg *ann_ips;
+
+
+void signal_handler (int type);
+void clean_rt(void);
+void update_rtfrom (void);
 
