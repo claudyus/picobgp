@@ -10,7 +10,8 @@ void let_me_spam(){
 
 	for (i=0; i < ipslen; i++) {
 		
-		if (sendto(sd, &(ips[i]), sizeof(bgpmsg), 0, &raddr, sizeof(struct sockaddr_in *)) == -1) {
+		if (sendto(sd, &(ips[i]), sizeof(bgpmsg), 0, 
+				(struct sockaddr *) &raddr, sizeof(struct sockaddr *)) == -1) {
 			perror("sendto");
 			exit(1);
 		}
