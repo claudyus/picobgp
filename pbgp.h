@@ -2,18 +2,21 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h> //malloc
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <time.h>
 #include <unistd.h>
 #include <stdio.h>
-#include <arpa/inet.h>
 #include <fcntl.h>
-#include <net/route.h>
+
+#include <arpa/inet.h>
+
 #include <sys/socket.h>
 #include <sys/ioctl.h>
-#include <netinet/in.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
 #include <net/if.h>
-#include <time.h>
+#include <net/route.h>
+#include <netinet/in.h>
 
 
 #define DEFandNULL(type, name) type name; memset(&name, 0, sizeof(type));
