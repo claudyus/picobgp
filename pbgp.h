@@ -8,31 +8,38 @@
 #include <stdio.h>
 #include <arpa/inet.h>
 #include <fcntl.h>
-#include <sys/types.h>
+#include <net/route.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <netinet/in.h>
 #include <net/if.h>
+#include <time.h>
+
 
 #define DEFandNULL(type, name) type name; memset(&name, 0, sizeof(type));
 
 typedef struct sbgpmsg {
 	struct in_addr addr;
 	struct in_addr netmask;
-	struct timeval l_update;
+	time_t l_update;
 } bgpmsg;
 
 int sd;		//udp socket descriptor
-int rd;		//route sock descriptor
 
-int ipslen;
-bgpmsg *ips;
+extern int ipslen;
+extern bgpmsg *ips;
 
-int ann_len;
-bgpmsg *ann_ips;
+extern int ann_len;
+extern bgpmsg *ann_ips;
 
+char local_ifname[IFNAMSIZ];
 
+//signal.c
 void signal_handler (int type);
+//route.c
 void clean_rt(void);
-void update_rtfrom (void);
-
+int update_rt (bgpmsg *flood_msg);
+//utils.c
+int ntomask (int n);
+void annips_add(bgpmsg info);
+void annips_del(int id);
