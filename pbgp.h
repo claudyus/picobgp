@@ -26,7 +26,7 @@ typedef struct sbgpmsg {
 
 int sd;		//udp socket descriptor
 
-extern int ipslen;
+extern int ips_len;
 extern bgpmsg *ips;
 
 extern int ann_len;

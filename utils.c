@@ -24,6 +24,10 @@ void add_ips(char *cidr) {
 	unsigned long mask = htonl(0xffffffff << (32-atoi(slash+1)));
 	memcpy (&(n_ips.netmask.s_addr), &mask , sizeof(long));
 	inet_aton(cidr, &(n_ips.addr));
+
+	ips = realloc(ips, sizeof(bgpmsg)*(++ips_len) );
+	memcpy(&ips[ips_len], &n_ips, sizeof(bgpmsg));
+
 }
 
 void parse_opt(int argc, char *argv[]) {
@@ -32,7 +36,7 @@ void parse_opt(int argc, char *argv[]) {
 	while ((opt = getopt(argc, argv, "i:s:")) != -1) {
 		switch (opt) {
 		case 'i':
-			strcpy(optarg, local_ifname);
+			strcpy(local_ifname, optarg);
 			break;
 		case 's':
 			add_ips(optarg);
