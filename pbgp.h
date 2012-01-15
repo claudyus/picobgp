@@ -43,7 +43,7 @@ struct in_addr loc_ip, brd_ip;
 void signal_handler (int type);
 //route.c
 void clean_rt(void);
-int update_rt (bgpmsg *flood_msg, int len);
+int update_rt (bgpmsg flood_msg, int len);
 //utils.c
 int ntomask (int n);
 void annips_add(bgpmsg info);

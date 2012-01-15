@@ -69,7 +69,7 @@ int main (int argc, char *argv[]) {
 				perror("read");
 				exit(1);
 			}
-			update_rt(&msg, r);
+			update_rt(msg, r);
 		}
 	}
 
