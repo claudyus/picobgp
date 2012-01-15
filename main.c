@@ -41,12 +41,11 @@ int main (int argc, char *argv[]) {
 		perror("get iface ip");
 		exit(1);
 	}
-
-	/* bind on the local address of the iface required */
 	loc_ip.s_addr = (*(struct sockaddr_in *)&ifr.ifr_addr).sin_addr.s_addr;
-	server_sock.sin_addr.s_addr = loc_ip.s_addr;
 	ioctl(sd, SIOCGIFBRDADDR, &ifr);
 	brd_ip.s_addr = (*(struct sockaddr_in *)&ifr.ifr_broadaddr).sin_addr.s_addr;
+
+	/* bind on the local address of the iface required */
 	if ( bind(sd, (struct sockaddr *) &server_sock, sizeof(server_sock)) < 0 ) {
 		perror("bind");
 		return 1;
