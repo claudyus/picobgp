@@ -68,7 +68,9 @@ int main (int argc, char *argv[]) {
 				perror("read");
 				exit(1);
 			}
-			update_rt(msg, r);
+			/* if the ip isn't the my own...*/
+			if (msg.loc_addr.s_addr != loc_ip.s_addr)
+				update_rt(msg, r);
 		}
 	}
 
