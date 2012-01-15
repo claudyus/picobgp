@@ -1,10 +1,6 @@
 
 #include "pbgp.h"
 
-int ntomask (int n) {
-	return htonl(0xffffffff << (32-n));
-}
-
 void annips_add(bgpmsg info){
 	time(&info.l_update);
 	ann_ips = realloc(ann_ips, sizeof(bgpmsg)*(++ann_len) );
@@ -21,14 +17,13 @@ void add_ips(char *cidr) {
 	*slash = '\0';
 
 	bgpmsg n_ips;
-	unsigned long mask = htonl(0xffffffff << (32-atoi(slash+1)));
-	memcpy (&(n_ips.netmask.s_addr), &mask , sizeof(long));
+	n_ips.netmask.s_addr =htonl(0xffffffff << (32-atoi(slash+1)));
 	inet_aton(cidr, &(n_ips.addr));
 	n_ips.loc_addr.s_addr = loc_ip.s_addr;
 
 	ips = realloc(ips, sizeof(bgpmsg)*(++ips_len) );
 	memcpy(ips+ips_len, &n_ips, sizeof(bgpmsg));
-	fprintf(stderr, "advertising %s netmask %s, %d\n", inet_ntoa(ips[ips_len].addr), inet_ntoa(n_ips.netmask), n_ips.netmask);
+	fprintf(stderr, "add ip to ips %s\n", inet_ntoa(n_ips.addr));
 }
 
 void parse_opt(int argc, char *argv[]) {
