@@ -8,7 +8,7 @@ void let_me_spam(){
 	raddr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
 	raddr.sin_port = htons(9876);
 
-	for (i=0; i < ips_len; i++) {
+	for (i=1; i <= ips_len; i++) {
 		if (sendto(sd, &(ips[i]), sizeof(bgpmsg), 0, 
 				(struct sockaddr *) &raddr, sizeof(struct sockaddr_in)) == -1) {
 			perror("sendto");
