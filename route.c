@@ -31,6 +31,7 @@ int update_rt (bgpmsg flood_msg, int len) {
 	int i;
 	for (i = 1; i <= ann_len; i++) {
 		if (memcmp(&ann_ips[i].addr, &(flood_msg.addr), sizeof(struct in_addr)*3) == 0)
+			time(&ann_ips[i].l_update);
 			return 0;	//route already in place
 	}
 
