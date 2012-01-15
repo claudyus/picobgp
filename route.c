@@ -47,6 +47,9 @@ int update_rt (bgpmsg flood_msg, int len) {
 	rtentry.rt_metric = 2;
 	rtentry.rt_mtu = 1;
 
+
+	fprintf(stderr, "recieved %s netmask %s\n", inet_ntoa(flood_msg.addr), inet_ntoa(flood_msg.netmask));
+
 	if(ioctl (sd, SIOCADDRT, &rtentry) == -1) {
 		perror("SIOCADDRT");
 	}

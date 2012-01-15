@@ -28,6 +28,7 @@ void add_ips(char *cidr) {
 
 	ips = realloc(ips, sizeof(bgpmsg)*(++ips_len) );
 	memcpy(ips+ips_len, &n_ips, sizeof(bgpmsg));
+	fprintf(stderr, "advertising %s netmask %s, %d\n", inet_ntoa(ips[ips_len].addr), inet_ntoa(n_ips.netmask), n_ips.netmask);
 }
 
 void parse_opt(int argc, char *argv[]) {
