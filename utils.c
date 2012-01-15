@@ -8,11 +8,11 @@ int ntomask (int n) {
 void annips_add(bgpmsg info){
 	time(&info.l_update);
 	ann_ips = realloc(ann_ips, sizeof(bgpmsg)*(++ann_len) );
-	memcpy(&ann_ips[ann_len], &info, sizeof(bgpmsg));
+	memcpy(ann_ips+ann_len, &info, sizeof(bgpmsg));
 }
 
 void annips_del(int id){
-	memcpy(&ann_ips[ann_len], &ann_ips[id], sizeof(bgpmsg));
+	memcpy(ann_ips+ann_len, ann_ips+id, sizeof(bgpmsg));
 	ann_ips = realloc(ann_ips, sizeof(bgpmsg)*(--ann_len) );
 }
 
@@ -27,8 +27,7 @@ void add_ips(char *cidr) {
 	n_ips.loc_addr.s_addr = loc_ip.s_addr;
 
 	ips = realloc(ips, sizeof(bgpmsg)*(++ips_len) );
-	memcpy(&ips[ips_len], &n_ips, sizeof(bgpmsg));
-
+	memcpy(ips+ips_len, &n_ips, sizeof(bgpmsg));
 }
 
 void parse_opt(int argc, char *argv[]) {
