@@ -65,11 +65,11 @@ int main (int argc, char *argv[]) {
 			bgpmsg msg;
 			struct sockaddr_in loc;
 			int locl = sizeof(struct sockaddr_in);
-			if (recvfrom (sd, &msg, sizeof(bgpmsg), 0, (struct sockaddr *)&loc, &locl) == -1) {
+			if ((r = recvfrom (sd, &msg, sizeof(bgpmsg), 0, (struct sockaddr *)&loc, &locl)) == -1) {
 				perror("read");
 				exit(1);
 			}
-			update_rt(&msg);
+			update_rt(&msg, r);
 		}
 	}
 

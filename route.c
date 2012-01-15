@@ -21,7 +21,10 @@ void clean_rt(void) {
 }
 
 
-int update_rt (bgpmsg *flood_msg) {
+int update_rt (bgpmsg *flood_msg, int len) {
+
+	if ( len < sizeof(bgpmsg))
+		return 0;
 
 	/*add rules to route table if it is not already here */
 	int i;
