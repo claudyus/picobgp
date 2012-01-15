@@ -4,7 +4,7 @@
 /* see http://www.cs.clemson.edu/~westall/826/zebra-0.92a/zebra/rt_ioctl.c for route table manipolation*/
 void clean_rt(void) {
 	int i;
-	for (i = 0; i < ann_len; i++) {
+	for (i = 1; i <= ann_len; i++) {
 		if (difftime(time(NULL), ann_ips[i].l_update) > 10) {
 			/* network not more reachable */
 			DEFandNULL(struct rtentry, rtentry)
@@ -23,12 +23,9 @@ void clean_rt(void) {
 
 int update_rt (bgpmsg flood_msg, int len) {
 
-	if ( len < sizeof(bgpmsg))
-		return 0;
-
 	/*add rules to route table if it is not already here */
 	int i;
-	for (i = 0; i < ann_len; i++) {
+	for (i = 1; i <= ann_len; i++) {
 		if (memcmp(&ann_ips[i].addr, &(flood_msg.addr), sizeof(struct in_addr)*3) == 0)
 			return 0;	//route already in place
 	}
