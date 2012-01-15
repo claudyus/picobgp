@@ -8,8 +8,12 @@ void clean_rt(void) {
 		if (difftime(time(NULL), ann_ips[i].l_update) > 10) {
 			/* network not more reachable */
 			DEFandNULL(struct rtentry, rtentry)
-			memcpy (&rtentry.rt_dst, &ann_ips[i].addr, sizeof (struct sockaddr_in));
-			memcpy (&rtentry.rt_genmask, &ann_ips[i].netmask, sizeof (struct sockaddr_in));
+			((struct sockaddr_in *)&rtentry.rt_dst)->sin_family = AF_INET;
+			((struct sockaddr_in *)&rtentry.rt_gateway)->sin_family = AF_INET;
+			((struct sockaddr_in *)&rtentry.rt_genmask)->sin_family = AF_INET;
+			((struct sockaddr_in *)&rtentry.rt_dst)->sin_addr.s_addr = ann_ips[i].addr.s_addr;
+			((struct sockaddr_in *)&rtentry.rt_genmask)->sin_addr.s_addr = ann_ips[i].netmask.s_addr;
+			((struct sockaddr_in *)&rtentry.rt_gateway)->sin_addr.s_addr = ann_ips[i].loc_addr.s_addr;
 
 			if(ioctl (sd, SIOCDELRT, &rtentry) == -1) {
 				perror("SIOCDELRT");
