@@ -24,6 +24,7 @@
 typedef struct sbgpmsg {
 	struct in_addr addr;
 	struct in_addr netmask;
+	struct in_addr loc_addr;
 	time_t l_update;
 } bgpmsg;
 
@@ -36,6 +37,7 @@ extern int ann_len;
 extern bgpmsg *ann_ips;
 
 char local_ifname[IFNAMSIZ];
+struct in_addr loc_ip, brd_ip;
 
 //signal.c
 void signal_handler (int type);

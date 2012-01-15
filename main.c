@@ -43,8 +43,11 @@ int main (int argc, char *argv[]) {
 	}
 
 	/* bind on the local address of the iface required */
-	//memcpy (&(server_sock.sin_addr), &((struct sockaddr_in)ifr.ifr_addr)->sin_addr, sizeof(struct in_addr));
-	if ( bind(sd, (struct sockaddr*) &server_sock, sizeof(server_sock)) < 0 ) {
+	loc_ip.s_addr = (*(struct sockaddr_in *)&ifr.ifr_addr).sin_addr.s_addr;
+	server_sock.sin_addr.s_addr = loc_ip.s_addr;
+	ioctl(sd, SIOCGIFBRDADDR, &ifr);
+	brd_ip.s_addr = (*(struct sockaddr_in *)&ifr.ifr_broadaddr).sin_addr.s_addr;
+	if ( bind(sd, (struct sockaddr *) &server_sock, sizeof(server_sock)) < 0 ) {
 		perror("bind");
 		return 1;
 	}

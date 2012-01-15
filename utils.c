@@ -24,6 +24,7 @@ void add_ips(char *cidr) {
 	unsigned long mask = htonl(0xffffffff << (32-atoi(slash+1)));
 	memcpy (&(n_ips.netmask.s_addr), &mask , sizeof(long));
 	inet_aton(cidr, &(n_ips.addr));
+	n_ips.loc_addr.s_addr = loc_ip.s_addr;
 
 	ips = realloc(ips, sizeof(bgpmsg)*(++ips_len) );
 	memcpy(&ips[ips_len], &n_ips, sizeof(bgpmsg));
