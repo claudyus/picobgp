@@ -61,7 +61,7 @@ int main (int argc, char *argv[]) {
 		FD_SET(sd, &fds);
 		/*wait for the other spammed package*/
 		int r = select (sd+1, &fds, NULL, NULL, NULL);
-		if (r == 0) {
+		if (r != -1) {
 			bgpmsg msg;
 			struct sockaddr_in loc;
 			int locl = sizeof(struct sockaddr_in);
