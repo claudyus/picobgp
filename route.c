@@ -31,6 +31,7 @@ int update_rt (bgpmsg flood_msg, int len) {
 	int i;
 	for (i = 1; i <= ann_len; i++) {
 		if (memcmp(&ann_ips[i].addr, &(flood_msg.addr), sizeof(struct in_addr)*3) == 0)
+			printf ("update_rt: announce already in ann_ips\n");
 			time(&ann_ips[i].l_update);
 			return 0;	//route already in place
 	}
@@ -49,8 +50,7 @@ int update_rt (bgpmsg flood_msg, int len) {
 	rtentry.rt_metric = 2;
 	rtentry.rt_mtu = 1;
 
-
-	fprintf(stderr, "recieved %s netmask %s\n", inet_ntoa(flood_msg.addr), inet_ntoa(flood_msg.netmask));
+	fprintf(stderr, "received %s netmask %s\n", inet_ntoa(flood_msg.addr), inet_ntoa(flood_msg.netmask));
 
 	if(ioctl (sd, SIOCADDRT, &rtentry) == -1) {
 		perror("SIOCADDRT");
