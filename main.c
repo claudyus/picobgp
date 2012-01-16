@@ -59,7 +59,7 @@ int main (int argc, char *argv[]) {
 			struct sockaddr_in loc;
 			int locl = sizeof(struct sockaddr_in);
 			if ((r = recvfrom (sd, &msg, sizeof(bgpmsg), 0, (struct sockaddr *)&loc, &locl)) == -1) {
-				perror("read");
+				perror("read(&msg)");
 				exit(1);
 			}
 			/* if the ip isn't the my own...*/

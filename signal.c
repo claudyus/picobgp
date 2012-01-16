@@ -12,7 +12,7 @@ void let_me_spam(){
 		fprintf(stderr, "advertising %s netmask %s\n", inet_ntoa(ips[i].addr), inet_ntoa(ips[i].netmask));
 		if (sendto(sd, &(ips[i]), sizeof(bgpmsg), 0, 
 				(struct sockaddr *) &raddr, sizeof(struct sockaddr_in)) == -1) {
-			perror("sendto");
+			perror("sendto(&(ips[i]))");
 			exit(1);
 		}
 	}

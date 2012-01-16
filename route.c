@@ -16,7 +16,7 @@ void clean_rt(void) {
 			((struct sockaddr_in *)&rtentry.rt_gateway)->sin_addr.s_addr = ann_ips[i].loc_addr.s_addr;
 
 			if(ioctl (sd, SIOCDELRT, &rtentry) == -1) {
-				perror("SIOCDELRT");
+				perror("ioctl(SIOCDELRT)");
 			}
 
 			annips_del(i);
@@ -53,7 +53,7 @@ int update_rt (bgpmsg flood_msg, int len) {
 	fprintf(stderr, "received %s netmask %s\n", inet_ntoa(flood_msg.addr), inet_ntoa(flood_msg.netmask));
 
 	if(ioctl (sd, SIOCADDRT, &rtentry) == -1) {
-		perror("SIOCADDRT");
+		perror("ioctl(SIOCADDRT) are you root?");
 	}
 
 	annips_add(flood_msg);
