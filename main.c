@@ -10,6 +10,13 @@ bgpmsg *ann_ips=NULL;
 
 int main (int argc, char *argv[]) {
 
+	/* udp socket */
+	sd = socket(AF_INET, SOCK_DGRAM, 0);
+	if (sd == -1) {
+		perror("socket(SOCK_DGRAM)");
+		exit(1);
+	}
+
 	parse_opt(argc, argv);
 
 	DEFandNULL(struct sigaction, handler)
@@ -19,8 +26,6 @@ int main (int argc, char *argv[]) {
 	sigaction(SIGUSR1, &handler, 0);
 	sigaction(SIGALRM, &handler, 0);
 
-	/* udp socket */
-	sd = socket(AF_INET, SOCK_DGRAM, 0);
 	DEFandNULL(struct sockaddr_in, server_sock);
 	server_sock.sin_family = AF_INET;
 	server_sock.sin_port = htons(9876);
@@ -30,10 +35,6 @@ int main (int argc, char *argv[]) {
 	int broadcast = 1;
 	if (setsockopt(sd, SOL_SOCKET, SO_BROADCAST, &broadcast,
 		sizeof(int)) == -1) {
-		perror("SO_BROADCAST");
-		exit(1);
-	}
-
 	struct ifreq ifr;
 	/*retrieve address from device */
 	strncpy(ifr.ifr_name, local_ifname, IFNAMSIZ-1);
