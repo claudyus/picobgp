@@ -35,20 +35,13 @@ int main (int argc, char *argv[]) {
 	int broadcast = 1;
 	if (setsockopt(sd, SOL_SOCKET, SO_BROADCAST, &broadcast,
 		sizeof(int)) == -1) {
-	struct ifreq ifr;
-	/*retrieve address from device */
-	strncpy(ifr.ifr_name, local_ifname, IFNAMSIZ-1);
-	if (ioctl(sd, SIOCGIFADDR, &ifr) == -1) {
-		perror("get iface ip");
+		perror("setsockopt(SO_BROADCAST)");
 		exit(1);
 	}
-	loc_ip.s_addr = (*(struct sockaddr_in *)&ifr.ifr_addr).sin_addr.s_addr;
-	ioctl(sd, SIOCGIFBRDADDR, &ifr);
-	brd_ip.s_addr = (*(struct sockaddr_in *)&ifr.ifr_broadaddr).sin_addr.s_addr;
 
 	/* bind on the local address of the iface required */
 	if ( bind(sd, (struct sockaddr *) &server_sock, sizeof(server_sock)) < 0 ) {
-		perror("bind");
+		perror("bind(&server_sock)");
 		return 1;
 	}
 

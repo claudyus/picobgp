@@ -12,6 +12,19 @@ void annips_del(int id){
 	ann_ips = realloc(ann_ips, sizeof(bgpmsg)*(--ann_len) );
 }
 
+void get_if_info(void) {
+	struct ifreq ifr;
+	/*retrieve address from device */
+	strncpy(ifr.ifr_name, local_ifname, IFNAMSIZ-1);
+	if (ioctl(sd, SIOCGIFADDR, &ifr) == -1) {
+		perror("ioctl(SIOCGIFADDR)");
+		exit(1);
+	}
+	loc_ip.s_addr = (*(struct sockaddr_in *)&ifr.ifr_addr).sin_addr.s_addr;
+	ioctl(sd, SIOCGIFBRDADDR, &ifr);
+	brd_ip.s_addr = (*(struct sockaddr_in *)&ifr.ifr_broadaddr).sin_addr.s_addr;
+}
+
 void add_ips(char *cidr) {
 	char *slash = index(cidr, '/');
 	*slash = '\0';
@@ -19,6 +32,8 @@ void add_ips(char *cidr) {
 	bgpmsg n_ips;
 	n_ips.netmask.s_addr =htonl(0xffffffff << (32-atoi(slash+1)));
 	inet_aton(cidr, &(n_ips.addr));
+	if (loc_ip.s_addr == 0)
+		get_if_info();
 	n_ips.loc_addr.s_addr = loc_ip.s_addr;
 
 	ips = realloc(ips, sizeof(bgpmsg)*(++ips_len) );
