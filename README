@@ -1,17 +1,26 @@
-picobgp is minimalistic not-compliant-bgp free-inspired deamon for
+picobgp is minimalistic not-compliant-bgp free-inspired daemon for
 subnetwork advertising and route topology update.
 
-The picobgp software was written to dynamicaly update the routing
-tables of some PCs of my coorporate vpn and so it doesn't want to became
-a solution to your problem but I hope that this code can be usefull
+The picobgp software was written to dynamically update the routing
+tables of some PCs of my vpns and so it doesn't want to became
+a solution for a generic problem but I hope that this code can be useful
 to someone else!
 
 USAGE
 ---------------
-simple call picobgp followed by -s X.Y.Z.A/B repeted n-time for example:
-/bin/picobgp -i eth0 -s 10.0.1.0/24 -s 10.55.0.0/16
+Advertising a couple of subnet, external interface eth0, this will
+also receive advertising from vpn0 iface:
+   picobgp -i vpn0 -s 10.0.1.0/24 -s 78.9.2.0/24
 
+Receive the routing advertising end populate the route table
+automatically:
+   picobgp -i eth0
 
-CONTACTS
---------------
+DEVELOP
+----------
+pbgp is very simple but any improvement is welcome. Feel free to drop me a mail
+for bugs, suggestion, patch and general improvement
+<c.mignanti@gmail.com>
+
+Thank you for using pbgp
 
