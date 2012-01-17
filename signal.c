@@ -24,6 +24,14 @@ void let_me_spam(){
 			exit(1);
 		}
 	}
+	for (i=1; i <= ann_len && cascade; i++) {
+		fprintf(stderr, "advertising cascate subnet %s\n", inet_ntoa(ann_ips[i].addr));
+		if (sendto(sd, &(ann_ips[i]), sizeof(bgpmsg), 0,
+				(struct sockaddr *) &raddr, sizeof(struct sockaddr_in)) == -1) {
+			perror("sendto(&(ips[i]))");
+			exit(1);
+		}
+	}
 }
 
 

@@ -57,7 +57,7 @@ int add_ips(char *cidr) {
 void parse_opt(int argc, char *argv[]) {
 
 	int opt;
-	while ((opt = getopt(argc, argv, "i:s:")) != -1) {
+	while ((opt = getopt(argc, argv, "i:s:c")) != -1) {
 		switch (opt) {
 		case 'i':
 			strcpy(local_ifname, optarg);
@@ -65,8 +65,11 @@ void parse_opt(int argc, char *argv[]) {
 		case 's':
 			add_ips(optarg);
 			break;
+		case 'c':
+			cascade = 1;
+			break;
 		default:
-			fprintf(stderr, "Usage: %s <-i iface> [-s X.X.X.X/Y]\n",
+			fprintf(stderr, "Usage: %s <-i iface> [-c] [-s X.X.X.X/Y]\n",
 					argv[0]);
 			exit(1);
 		}
