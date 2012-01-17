@@ -25,7 +25,7 @@ void get_if_info(void) {
 	brd_ip.s_addr = (*(struct sockaddr_in *)&ifr.ifr_broadaddr).sin_addr.s_addr;
 }
 
-void add_ips(char *cidr) {
+int add_ips(char *cidr) {
 	char *slash = index(cidr, '/');
 	*slash = '\0';
 
@@ -35,6 +35,11 @@ void add_ips(char *cidr) {
 	if (loc_ip.s_addr == 0)
 		get_if_info();
 	n_ips.loc_addr.s_addr = loc_ip.s_addr;
+
+	if (n_ips.addr.s_addr & ~n_ips.netmask.s_addr) {
+		printf ("skip the subnet %s/%s conflicts!\n", cidr, slash+1);
+		return 0;
+	}
 
 	ips = realloc(ips, sizeof(bgpmsg)*(++ips_len) );
 	memcpy(ips+ips_len, &n_ips, sizeof(bgpmsg));
