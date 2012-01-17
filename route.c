@@ -44,7 +44,7 @@ int update_rt (bgpmsg flood_msg, int len) {
 	((struct sockaddr_in *)&rtentry.rt_gateway)->sin_addr.s_addr = 0;
 	((struct sockaddr_in *)&rtentry.rt_genmask)->sin_addr.s_addr = flood_msg.netmask.s_addr;
 
-	rtentry.rt_dev = local_ifname
+	rtentry.rt_dev = local_ifname;
 	rtentry.rt_flags = RTF_UP;
 
 	//fprintf(stderr, "received %s netmask %d, localaddr: %d\n", inet_ntoa(flood_msg.addr), flood_msg.netmask, flood_msg.loc_addr);
