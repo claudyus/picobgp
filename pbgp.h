@@ -42,7 +42,7 @@ struct in_addr loc_ip, brd_ip;
 //signal.c
 void signal_handler (int type);
 //route.c
-void clean_rt(void);
+void clean_rt(int force);
 int update_rt (bgpmsg flood_msg, int len);
 //utils.c
 int ntomask (int n);

@@ -9,10 +9,10 @@
 
 #include "pbgp.h"
 
-void clean_rt(void) {
+void clean_rt(int force) {
 	int i;
 	for (i = 1; i <= ann_len; i++) {
-		if (difftime(time(NULL), ann_ips[i].l_update) > 10) {
+		if (difftime(time(NULL), ann_ips[i].l_update) > 10 || force) {
 			/* network not more reachable */
 			DEFandNULL(struct rtentry, rtentry)
 			((struct sockaddr_in *)&rtentry.rt_dst)->sin_family = \

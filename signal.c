@@ -31,12 +31,13 @@ void signal_handler (int type) {
 	switch (type) {
 		case SIGINT:
 			close(sd);
+			clean_rt(1);	//remove all route
 			printf("Exit due to SIGINT\n");
 			exit(0);
 			break;
 		case SIGALRM:
 			let_me_spam();
-			clean_rt();		//remove old route
+			clean_rt(0);		//remove old route
 			alarm(3);	//and spam again...
 			break;
 		case SIGUSR1:
