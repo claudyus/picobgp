@@ -15,6 +15,7 @@ bgpmsg *ips=NULL;
 int ann_len=0;
 bgpmsg *ann_ips=NULL;
 
+int cascade = 1;
 
 int main (int argc, char *argv[]) {
 
