@@ -13,7 +13,7 @@ void let_me_spam(){
 	int i;
 	DEFandNULL(struct sockaddr_in, raddr);
 	raddr.sin_family = AF_INET;
-	raddr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
+	raddr.sin_addr.s_addr = brd_ip.s_addr;
 	raddr.sin_port = htons(9876);
 
 	for (i=1; i <= ips_len; i++) {
