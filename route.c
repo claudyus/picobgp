@@ -20,7 +20,8 @@ void clean_rt(int force) {
 			((struct sockaddr_in *)&rtentry.rt_genmask)->sin_family = AF_INET;
 			((struct sockaddr_in *)&rtentry.rt_dst)->sin_addr.s_addr = ann_ips[i].addr.s_addr;
 			((struct sockaddr_in *)&rtentry.rt_genmask)->sin_addr.s_addr = ann_ips[i].netmask.s_addr;
-			((struct sockaddr_in *)&rtentry.rt_gateway)->sin_addr.s_addr = ann_ips[i].loc_addr.s_addr;
+			((struct sockaddr_in *)&rtentry.rt_gateway)->sin_addr.s_addr = 0;
+			rtentry.rt_dev = local_ifname;
 
 			if(ioctl (sd, SIOCDELRT, &rtentry) == -1) {
 				perror("ioctl(SIOCDELRT)");

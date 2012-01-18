@@ -15,6 +15,8 @@ bgpmsg *ips=NULL;
 int ann_len=0;
 bgpmsg *ann_ips=NULL;
 
+int cascade = 1;
+int one_shot = 0;	/*one-shot and die mode */
 
 int main (int argc, char *argv[]) {
 
@@ -58,7 +60,7 @@ int main (int argc, char *argv[]) {
 	fd_set fds;
 	FD_ZERO(&fds);
 
-	for (;;) {
+	for (;!one_shot;) {
 		FD_SET(sd, &fds);
 		/*wait for the other spammed package*/
 		int r = select (sd+1, &fds, NULL, NULL, NULL);
@@ -75,6 +77,10 @@ int main (int argc, char *argv[]) {
 				update_rt(msg, r);
 		}
 	}
+
+	/* implement the one-shot and die mode */
+	let_me_spam();
+	return 0;
 
 }
 

@@ -38,6 +38,8 @@ extern bgpmsg *ann_ips;
 
 char local_ifname[IFNAMSIZ];
 struct in_addr loc_ip, brd_ip;
+extern int cascade;
+extern int one_shot;
 
 //signal.c
 void signal_handler (int type);

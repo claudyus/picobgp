@@ -12,7 +12,7 @@ Advertising a couple of subnet, external interface eth0, this will
 also receive advertising from vpn0 iface:
    picobgp -i vpn0 -s 10.0.1.0/24 -s 78.9.2.0/24
 
-Receive the routing advertising end populate the route table
+Receive the routing advertising and populate the route table
 automatically:
    picobgp -i eth0
 
