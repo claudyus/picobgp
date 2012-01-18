@@ -67,14 +67,23 @@ void parse_opt(int argc, char *argv[]) {
 			break;
 		case 'c':
 			cascade = 1;
-			printf("BEWARE! cascade option can lead to routing loops!\n")
+			printf("BEWARE! cascade (-c) option can lead to routing loops!\n");
 			break;
 		case '1':
 			one_shot = 1;
 			break;
 		default:
-			fprintf(stderr, "Usage: %s <-i iface>  [-1] [-c] [-s X.X.X.X/Y]\n",
+			fprintf(stderr, "Usage: %s <-i iface>  [-1] [-c] [-s X.X.X.X/Y]\n\n",
 					argv[0]);
+			fprintf(stderr, "  -i iface\n");
+			fprintf(stderr, "      listen and send routing advertisements on interface iface\n");
+			fprintf(stderr, "  -s X.X.X.X/Y\n");
+			fprintf(stderr, "      advertise the subnet X.X.X.X/Y\n");
+			fprintf(stderr, "  -1\n");
+			fprintf(stderr, "      one-shot: send one routing advertisement and die\n");
+			fprintf(stderr, "  -c\n");
+			fprintf(stderr, "      cascade: re-advertise received routes.\n");
+			fprintf(stderr, "      Handle with care: the -c option can lead to routing loops.\n");
 			exit(1);
 		}
 	}
