@@ -12,3 +12,7 @@ main: $(OBJS)
 
 clean:
 	rm -fr *.o pbgp
+
+install:
+	cp -f pbgp /usr/sbin/pbgp
+
