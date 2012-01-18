@@ -69,11 +69,11 @@ void parse_opt(int argc, char *argv[]) {
 			cascade = 1;
 			printf("BEWARE! cascade option can lead to routing loops!\n")
 			break;
-		case 'd':
+		case '1':
 			one_shot = 1;
 			break;
 		default:
-			fprintf(stderr, "Usage: %s <-i iface>  [-d] [-c] [-s X.X.X.X/Y]\n",
+			fprintf(stderr, "Usage: %s <-i iface>  [-1] [-c] [-s X.X.X.X/Y]\n",
 					argv[0]);
 			exit(1);
 		}
