@@ -9,7 +9,7 @@
 
 #include "pbgp.h"
 
-void let_me_spam(){
+void let_me_spam(void){
 	int i;
 	DEFandNULL(struct sockaddr_in, raddr);
 	raddr.sin_family = AF_INET;

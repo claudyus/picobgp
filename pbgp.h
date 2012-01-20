@@ -1,7 +1,7 @@
 #include <signal.h>
 #include <errno.h>
 #include <string.h>
-#include <stdlib.h> //malloc
+#include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -28,7 +28,7 @@ typedef struct sbgpmsg {
 	time_t l_update;
 } bgpmsg;
 
-int sd;		//udp socket descriptor
+int sd;		/* udp socket descriptor */
 
 extern int ips_len;
 extern bgpmsg *ips;
@@ -41,12 +41,15 @@ struct in_addr loc_ip, brd_ip;
 extern int cascade;
 extern int one_shot;
 
-//signal.c
+/* function in signal.c */
+void let_me_spam(void);
 void signal_handler (int type);
-//route.c
+/* function in route.c */
 void clean_rt(int force);
 int update_rt (bgpmsg flood_msg, int len);
-//utils.c
-int ntomask (int n);
+/* function utils.c */
 void annips_add(bgpmsg info);
 void annips_del(int id);
+void parse_opt(int argc, char *argv[]);
+void get_if_info(void);
+int add_ips(char *cidr);
