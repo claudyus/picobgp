@@ -11,13 +11,15 @@
 
 void annips_add(bgpmsg info){
 	time(&info.l_update);
-	ann_ips = realloc(ann_ips, sizeof(bgpmsg)*(++ann_len) );
-	memcpy(ann_ips+ann_len, &info, sizeof(bgpmsg));
+	ann_ips = realloc(ann_ips, sizeof(bgpmsg)*(ann_len+1) );
+	memcpy(&ann_ips[ann_len], &info, sizeof(bgpmsg));
+	ann_len ++;
 }
 
 void annips_del(int id){
-	memcpy(ann_ips+ann_len, ann_ips+id, sizeof(bgpmsg));
-	ann_ips = realloc(ann_ips, sizeof(bgpmsg)*(--ann_len) );
+	memcpy(&ann_ips[ann_len-1], &ann_ips[id], sizeof(bgpmsg));
+	ann_ips = realloc(ann_ips, sizeof(bgpmsg)*(ann_len-1) );
+	ann_len --;
 }
 
 void get_if_info(void) {
@@ -49,8 +51,9 @@ int add_ips(char *cidr) {
 		return 0;
 	}
 
-	ips = realloc(ips, sizeof(bgpmsg)*(++ips_len) );
-	memcpy(ips+ips_len, &n_ips, sizeof(bgpmsg));
+	ips = realloc(ips, sizeof(bgpmsg)*(ips_len+1) );
+	memcpy(&ips[ips_len], &n_ips, sizeof(bgpmsg));
+	ips_len++;
 	fprintf(stderr, "add ip to ips %s\n", inet_ntoa(n_ips.addr));
 }
 

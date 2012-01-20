@@ -16,7 +16,7 @@ void let_me_spam(){
 	raddr.sin_addr.s_addr = brd_ip.s_addr;
 	raddr.sin_port = htons(9876);
 
-	for (i=1; i <= ips_len; i++) {
+	for (i=0; i < ips_len; i++) {
 		fprintf(stderr, "advertising %s netmask %s\n", inet_ntoa(ips[i].addr), inet_ntoa(ips[i].netmask));
 		if (sendto(sd, &(ips[i]), sizeof(bgpmsg), 0, 
 				(struct sockaddr *) &raddr, sizeof(struct sockaddr_in)) == -1) {
@@ -24,7 +24,7 @@ void let_me_spam(){
 			exit(1);
 		}
 	}
-	for (i=1; i <= ann_len && cascade; i++) {
+	for (i=0; i < ann_len && cascade; i++) {
 		fprintf(stderr, "advertising cascade subnet %s\n", inet_ntoa(ann_ips[i].addr));
 		if (sendto(sd, &(ann_ips[i]), sizeof(bgpmsg), 0,
 				(struct sockaddr *) &raddr, sizeof(struct sockaddr_in)) == -1) {
