@@ -38,9 +38,9 @@ void let_me_spam(){
 void signal_handler (int type) {
 	switch (type) {
 		case SIGINT:
-			close(sd);
 			clean_rt(1);	//remove all route
 			printf("Exit due to SIGINT\n");
+			close(sd);
 			exit(0);
 			break;
 		case SIGALRM:
