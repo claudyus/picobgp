@@ -15,7 +15,7 @@ bgpmsg *ips=NULL;
 int ann_len=0;
 bgpmsg *ann_ips=NULL;
 
-int cascade = 1;
+int cascade = 0;
 int one_shot = 0;	/*one-shot and die mode */
 
 int main (int argc, char *argv[]) {
