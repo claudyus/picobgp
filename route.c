@@ -11,7 +11,7 @@
 
 void clean_rt(int force) {
 	int i;
-	for (i = 1; i <= ann_len; i++) {
+	for (i = 0; i < ann_len; i++) {
 		if (difftime(time(NULL), ann_ips[i].l_update) > 10 || force) {
 			/* network not more reachable */
 			DEFandNULL(struct rtentry, rtentry)
@@ -37,7 +37,7 @@ int update_rt (bgpmsg flood_msg, int len) {
 
 	/*add rules to route table if it is not already here */
 	int i;
-	for (i = 1; i <= ann_len; i++) {
+	for (i = 0; i < ann_len; i++) {
 		if (memcmp(&ann_ips[i].addr, &(flood_msg.addr), sizeof(struct in_addr)*3) == 0)
 			printf ("update_rt: announce already in ann_ips\n");
 			time(&ann_ips[i].l_update);
@@ -55,8 +55,6 @@ int update_rt (bgpmsg flood_msg, int len) {
 
 	rtentry.rt_dev = local_ifname;
 	rtentry.rt_flags = RTF_UP;
-
-	//fprintf(stderr, "received %s netmask %d, localaddr: %d\n", inet_ntoa(flood_msg.addr), flood_msg.netmask, flood_msg.loc_addr);
 
 	if(ioctl (sd, SIOCADDRT, &rtentry) == -1) {
 		perror("ioctl(SIOCADDRT) are you root?");
