@@ -50,6 +50,7 @@ int main (int argc, char *argv[]) {
 	}
 
 	/* bind on the local address of the iface required */
+	server_sock.sin_addr.s_addr = loc_ip.s_addr;
 	if ( bind(sd, (struct sockaddr *) &server_sock, sizeof(server_sock)) < 0 ) {
 		perror("bind(&server_sock)");
 		return 1;
