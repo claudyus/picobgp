@@ -50,11 +50,17 @@ int update_rt (bgpmsg flood_msg, int len) {
 	((struct sockaddr_in *)&rtentry.rt_genmask)->sin_family = AF_INET;
 
 	((struct sockaddr_in *)&rtentry.rt_dst)->sin_addr.s_addr = flood_msg.addr.s_addr;
-	((struct sockaddr_in *)&rtentry.rt_gateway)->sin_addr.s_addr = 0;
 	((struct sockaddr_in *)&rtentry.rt_genmask)->sin_addr.s_addr = flood_msg.netmask.s_addr;
 
+	if (flood_msg.netmask.s_addr != 0xffffffff) { /* is a subnet */
+		((struct sockaddr_in *)&rtentry.rt_gateway)->sin_addr.s_addr =flood_msg.loc_addr.s_addr;
+		rtentry.rt_flags = RTF_UP | RTF_GATEWAY;
+	} else {
+		((struct sockaddr_in *)&rtentry.rt_gateway)->sin_addr.s_addr = 0;
+		rtentry.rt_flags = RTF_UP;
+	}
+
 	rtentry.rt_dev = local_ifname;
-	rtentry.rt_flags = RTF_UP;
 
 	if(ioctl (sd, SIOCADDRT, &rtentry) == -1) {
 		perror("ioctl(SIOCADDRT) are you root?");
