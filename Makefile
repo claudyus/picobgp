@@ -2,13 +2,14 @@
 
 CFLAGS?=-g
 CROSSCOMPILE?=
+GCC?=$(CROSSCOMPILE)gcc
 OBJS=main.o signal.o route.o utils.o
 
 main: $(OBJS)
-	$(CROSSCOMPILE)gcc $(CFLAGS) -o pbgp $(OBJS)
+	$(GCC) $(CFLAGS) -o pbgp $(OBJS)
 
 .c.o:
-	$(CROSSCOMPILE)gcc $(CFLAGS) -c $<
+	$(GCC) $(CFLAGS) -c $<
 
 clean:
 	rm -fr *.o pbgp
