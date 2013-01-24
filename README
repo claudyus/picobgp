@@ -26,6 +26,8 @@ receive the routing advertisements and populate the routing table
 automatically:
    picobgp -i eth0
 
+See also a short presentation on http://www.slideshare.net/claudiomig3/picobgp-a-simple
+
 DEVELOPMENT
 ------------
 picobgp is very simple but any improvement is welcome. Feel free to drop 
