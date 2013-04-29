@@ -1,0 +1,29 @@
+### Commented entries have reasonable defaults.
+### Uncomment to edit them.
+#Source: ../../
+Section: misc
+Priority: optional
+Homepage: http://mignanti.eu/progetti/picobgp
+Standards-Version: 3.9.2
+
+Package: picobgp
+Version: 0.2
+Maintainer: Claudio Mignanti <c.mignanti@gmail.com>
+# Pre-Depends: <comma-separated list of packages>
+# Depends: <comma-separated list of packages>
+# Recommends: <comma-separated list of packages>
+# Suggests: <comma-separated list of packages>
+# Provides: <comma-separated list of packages>
+# Replaces: <comma-separated list of packages>
+# Architecture: all
+Copyright: LICENSE
+# Changelog: <changelog file; defaults to a generic changelog>
+Readme: README
+# Extra-Files: <comma-separated list of additional files for the doc directory>
+Files: pbgp /usr/local/sbin
+Description: PicoBGP - tiny routing advertising daemon
+  picobgp is minimalistic daemon for subnetworks advertising and route topology update.
+  .
+  The picobgp daemon is written in C and is really simple to use. 
+  It support a small list of option and allow you to advertise a given subnet on an interface of your pc.
+  The subnet announce is sent using broadcast address on the device link and all the hosts on the same connection can be felt by the announce.
